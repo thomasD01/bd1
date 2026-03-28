@@ -1,0 +1,5 @@
+
+# cpp build folder
+firmware/kinematics/simulation/.venv/
+firmware/kinematics/simulation/build/
+firmware/kinematics/simulation/*.so
