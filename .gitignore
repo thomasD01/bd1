@@ -1,5 +1,5 @@
 
 # cpp build folder
-firmware/kinematics/simulation/.venv/
-firmware/kinematics/simulation/build/
-firmware/kinematics/simulation/*.so
+firmware/lib/kinematics/simulation/.venv/
+firmware/lib/kinematics/simulation/build/
+firmware/lib/kinematics/simulation/*.so

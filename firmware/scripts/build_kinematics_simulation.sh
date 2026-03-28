@@ -2,6 +2,10 @@
 
 set -e
 
+cd "$(dirname "$0")"
+
+cd ../lib/kinematics/simulation
+
 # Create build directory if it doesn't exist
 mkdir -p build
 cd build
