@@ -11,7 +11,7 @@ mkdir -p build
 cd build
 
 # Run CMake to configure the project
-cmake ..
+cmake -Dpybind11_DIR=$(python -m pybind11 --cmakedir) ..
 
 # Build the project
 make

@@ -14,13 +14,12 @@ pelvis_width = 90.0
 biped_controller = bd1_sim.BD1_Biped(L1, L2, pelvis_width)
 gait_engine = bd1_sim.BD1_Gait(L1, L2)
 gait_params = gait_engine.getConfig()
-D = gait_params.step_length # Shorthand for our step length
+D = gait_params.step_length
 
 fig = plt.figure(figsize=(10, 8))
 ax = fig.add_subplot(111, projection='3d')
 plt.subplots_adjust(left=0.15, bottom=0.25)
 
-# Expand the X limits so he has room to walk!
 ax.set_xlim([-50, 400])
 ax.set_ylim([-100, 100])
 ax.set_zlim([0, 220])
@@ -33,32 +32,26 @@ line_L, = ax.plot([], [], [], 'o-', color='cyan', linewidth=5, markersize=8)
 line_R, = ax.plot([], [], [], 'o-', color='orange', linewidth=5, markersize=8)
 line_pelvis, = ax.plot([], [], [], '-', color='black', linewidth=8)
 
-# We only need Z (to test Groucho walking) and a continuous Time slider
 ax_bz = plt.axes([0.15, 0.15, 0.65, 0.03])
 ax_t  = plt.axes([0.15, 0.10, 0.65, 0.03])
 
 slider_bz = Slider(ax_bz, 'Body Z', 50.0, 220.0, valinit=abs(gait_params.resting_z))
-# Time now goes from 0.0 to 4.0 (4 full steps)
 slider_t  = Slider(ax_t,  'Time (t)', 0.0, 4.0, valinit=0.0)
 
 def update(val):
     t = slider_t.val
-    step_index = int(math.floor(t)) # Which step are we on? (0, 1, 2, 3)
-    local_t = t - step_index        # The 0.0 to 1.0 phase of the CURRENT step
+    step_index = int(math.floor(t))
+    local_t = t - step_index
     
-    # 1. Body Math (Constant forward motion + Sine wave sway)
     body_x = t * D
-    # Sway uses a sine wave. Amplitude is half pelvis width.
     body_y = math.sin(t * math.pi) * (pelvis_width / 2.0) 
     body_z = slider_bz.val
     
     body = bd1_sim.Point3D(body_x, body_y, body_z)
     
-    # 2. Foot Math
     is_right_swing = (step_index % 2 == 0)
     
     if is_right_swing:
-        # Right foot swings, Left foot is planted
         l_x = step_index * D
         l_foot = bd1_sim.Point3D(l_x, pelvis_width / 2.0, 0.0)
         
@@ -70,7 +63,6 @@ def update(val):
         r_foot = gait_engine.calculateBezierStep(local_t, start_pt, end_pt)
         
     else:
-        # Left foot swings, Right foot is planted
         r_x = step_index * D
         r_foot = bd1_sim.Point3D(r_x, -(pelvis_width/2.0), 0.0)
         
@@ -81,10 +73,8 @@ def update(val):
         end_pt = bd1_sim.Point3D(l_end_x, pelvis_width/2.0, 0.0)
         l_foot = gait_engine.calculateBezierStep(local_t, start_pt, end_pt)
     
-    # 3. Solve IK
     state = biped_controller.calculateStance(body, l_foot, r_foot)
     
-    # 4. Plotting
     l_hip_y = body.y + (pelvis_width / 2.0)
     r_hip_y = body.y - (pelvis_width / 2.0)
     

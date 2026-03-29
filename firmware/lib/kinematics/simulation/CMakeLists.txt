@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(bd1_simulation)
+project(bd1_kinematics_simulation)
 
 find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 

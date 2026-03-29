@@ -1,5 +1,11 @@
 
-# cpp build folder
-firmware/lib/kinematics/simulation/.venv/
+# python venv
+.venv/
+
+# simulations build files
 firmware/lib/kinematics/simulation/build/
 firmware/lib/kinematics/simulation/*.so
+
+firmware/lib/pid/simulation/build/
+firmware/lib/pid/simulation/*.so
+
