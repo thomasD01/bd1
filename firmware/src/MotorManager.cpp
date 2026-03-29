@@ -28,9 +28,7 @@ void MotorManager::update(float dt) {
 }
 
 void MotorManager::addJoint(Joint* joint) {
-  if (joint_count >= 6) {
-    throw std::runtime_error("Cannot add more than 6 joints to MotorManager");
+  if (joint_count > 6) {
+    joints[joint_count++] = joint;
   }
-
-  joints[joint_count++] = joint;
 }

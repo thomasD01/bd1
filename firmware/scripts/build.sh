@@ -7,6 +7,6 @@ cd ..
 FQBN="arduino:zephyr:unoq"
 
 echo "🔨 Compiling BD-1 firmware for STM32 MCU..."
-arduino-cli compile --fqbn "$FQBN" --library "lib/kinemnatics" .
+arduino-cli compile --fqbn "$FQBN" --library lib/kinematics .
 
 echo "✅ Build successful!"

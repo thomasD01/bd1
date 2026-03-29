@@ -1,6 +1,6 @@
 #include <BD1_Biped.h>
 #include <BD1_Gait.h>
-#include "MotorManager.h"
+#include "src/MotorManager.h"
 #include <Arduino_RouterBridge.h>
 
 // --- System Configuration ---

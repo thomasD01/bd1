@@ -1,0 +1,93 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Firmware",
+      "type": "shell",
+      "command": "./scripts/build.sh",
+      "options": {
+        "cwd": "${workspaceFolder}/firmware"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Upload Firmware",
+      "type": "shell",
+      "command": "./scripts/upload.sh",
+      "options": {
+        "cwd": "${workspaceFolder}/firmware"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Deploy Firmware",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/firmware"
+      },
+      "command": "./scripts/deploy.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "build kinematics simulation",
+      "type": "shell",
+      "command": "./scripts/build_kinematics_simulation.sh",
+      "options": {
+        "cwd": "${workspaceFolder}/firmware"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "run kinematics simulation",
+      "type": "shell",
+      "command": "./scripts/kinematics_simulation.sh",
+      "dependsOn": "build kinematics simulation",
+      "options": {
+        "cwd": "${workspaceFolder}/firmware"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
