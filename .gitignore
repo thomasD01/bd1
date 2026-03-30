@@ -9,3 +9,5 @@ firmware/lib/kinematics/simulation/*.so
 firmware/lib/pid/simulation/build/
 firmware/lib/pid/simulation/*.so
 
+debugger/node_modules/
+debugger/dist/
