@@ -1,13 +1,16 @@
 import { app, BrowserWindow } from "electron";
 import started from "electron-squirrel-startup";
 import path from "node:path";
+import { registerSerialHandler, registerUnoHandler } from "./src/serial";
 
 if (started) {
   app.quit();
 }
 
+export let mainWindow: BrowserWindow | null = null;
+
 const createWindow = () => {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -24,6 +27,9 @@ const createWindow = () => {
       path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
     );
   }
+
+  registerUnoHandler();
+  registerSerialHandler();
 
   mainWindow.webContents.openDevTools();
 };

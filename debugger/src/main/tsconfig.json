@@ -1,4 +1,4 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["src/", "main.ts", "../../forge.env.d.ts"]
+  "include": ["src/", "main.ts", "../../forge.env.d.ts", "../env.ts"]
 }
